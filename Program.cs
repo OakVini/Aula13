@@ -74,23 +74,20 @@ namespace Marquezani
 
         }
 
-        static void Dados(string dados)
-        {
-
-        }
-
         static void Usuario()
         {
 
-            Console.Write("Digite por favor o tamanho do seu veto: ");
+            Mensagem("Digite por favor o tamanho do seu veto: ", 2);
             int tamanhovetor = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Por favor digite os numeros para o vetor \n Condizente ao tamanho do vetor: ");
+            Mensagem("Por favor digite os numeros para o vetor \n Condizente ao tamanho do vetor: ", 2);
             string valorpos = Console.ReadLine();
 
-            int[] vetor = new int[tamanhovetor];
+            string[] cortar = valorpos.Split(' ');
 
-            for (int i = 0; i < vetor.Length; i++)
+            foreach (string s in cortar)
             {
+
+                Console.Write(s + "\t");
 
             }
 
@@ -123,6 +120,7 @@ namespace Marquezani
             int pos1 = 0;
             int pos2 = 0;
 
+
             ImprimeFor(vetor);
             Trocar(vetor, 1, 3);
             ImprimeFor(vetor);
@@ -130,12 +128,39 @@ namespace Marquezani
             Mensagem("Digite as posições que deseja trocar, meu anjo!", 0);
             Mensagem("Posição 1: ", 2);
             pos1 = Convert.ToInt32(Console.ReadLine());
-            Mensagem("Posição 2: ", 2);
+
+            if (pos1 < 0 || pos1 > vetor.Length)
+            {
+                do
+                {
+                    Console.Clear();
+                    Mensagem($"Esse numero {pos1} não é valido.", 1);
+                    Mensagem("Digite um numero valido para a posição 1. ", 1);
+                    Mensagem("Posição 1: ", 2);
+                    pos1 = Convert.ToInt32(Console.ReadLine());
+                } while (pos1 < 0 || pos1 > vetor.Length);
+            }
+
+            Mensagem("\nPosição 2: ", 2);
             pos2 = Convert.ToInt32(Console.ReadLine());
+
+            if (pos2 < 0 || pos2 > vetor.Length)
+            {
+                do
+                {
+                    Console.Clear();
+                    Mensagem($"\nEsse numero {pos2} não é valido.", 1);
+                    Mensagem("Digite um numero valido para a posição 2. ", 1);
+                    Mensagem("Posição 2: ", 2);
+                    pos2 = Convert.ToInt32(Console.ReadLine());
+                } while (pos2 < 0 || pos2 > vetor.Length);
+            }
 
             Mensagem("Resultado do vetor agora: ", 1);
             Trocar(vetor, pos1, pos2);
             ImprimeFor(vetor);
+
+            Usuario();
 
             Console.ReadKey();
 
